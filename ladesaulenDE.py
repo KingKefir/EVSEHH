@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load your data
-file_path = 'ladesaeulenregister_Bundesnetzagentur_2024.csv'  # Replace with your CSV file path
+file_path = 'data\ladesaeulenregister_Bundesnetzagentur_2024.csv'  # Replace with your CSV file path
 data = pd.read_csv(file_path, sep=';', skiprows=10)
 
 # Display the first few rows
