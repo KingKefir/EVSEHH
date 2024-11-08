@@ -3,6 +3,8 @@ import pandas as pd
 # Load your data
 file_path = 'data\ladesaeulenregister_Bundesnetzagentur_2024.csv'  # Replace with your CSV file path
 data = pd.read_csv(file_path, sep=';', skiprows=10)
+kfzxl = 'data\\fz27_202210.xlsx'
+kfzdf = pd.read_excel(kfzxl, sheet_name='FZ 27.2', header=7, usecols='B:M')
 
 # Display the first few rows
 print("First 5 rows:")
@@ -51,8 +53,19 @@ count = 0
 
 lades_per_cap = {}
 
-print("Ladesäulen je 100k Einwohner \n")
-for i,j  in zip(bundesland_counts, bevoelkerung):
-    print(f'{laender[count]}:   {round((i/j)*100000, 2)}')
-    lades_per_cap[laender[count]] = round((i/j)*100000, 2)
-    count += 1
+# print("Ladesäulen je 100k Einwohner \n")
+# for i,j  in zip(bundesland_counts, bevoelkerung):
+#     print(f'{laender[count]}:   {round((i/j)*100000, 2)}')
+#     lades_per_cap[laender[count]] = round((i/j)*100000, 2)
+#     count += 1
+
+badenwDF = kfzdf.iloc[16:23].reset_index(drop=True)
+
+# kraftstoffart = kfzdf['Kraftstoffart'].unique()
+
+
+
+# print(kraftstoffart)
+print(kfzdf.sample(6))
+
+print(badenwDF.describe())

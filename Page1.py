@@ -4,53 +4,81 @@ import folium
 from streamlit_folium import st_folium
 import json
 
-APP_TITLE = 'Fraud and Identity Theft Report'
-APP_SUB_TITLE = 'Source: Federal Trade Commission'
+APP_TITLE = 'LEROM IPSUM'
+APP_SUB_TITLE = 'Ipsum Ipsum'
 
 
 # TODO Filter Anzahl Säulen gesamt/per 100k/per EV je Bundesland
 # def display_time_filters(df):
-#     year_list = list(df['Year'].unique())
-#     year_list.sort()
-#     year = st.sidebar.selectbox('Year', year_list, len(year_list)-1)
-#     st.header(f'{year}')
-#     return year, quarter
 
-# Load your data
-file_path = 'data\ladesaeulenregister_Bundesnetzagentur_2024.csv'  # Replace with your CSV file path
+# EVSE Daten der Bundesnetzagentur
+file_path = 'data\\ladesaeulenregister_Bundesnetzagentur_2024.csv'
 data = pd.read_csv(file_path, sep=';', skiprows=10, low_memory=False)
 
+with open('data\\DE_niedrig.geo.json', encoding='utf-8') as f:
+    geodata = json.load(f)
+
+# KFZ Daten der Bundesländer
+kfzxl = 'data\\fz27_202210.xlsx'
+kfzdf = pd.read_excel(kfzxl, sheet_name='FZ 27.2', header=7, usecols='B,C,M')
+
+
+# Anzahl KFZ nach Kraftstoffart und Gesamt per Bundesland
+state_dfs = {}
+
+
+for i in range(0, 144, 8):
+    state_name = kfzdf.iloc[i, 0]
+
+    state_dfs[state_name] = kfzdf.iloc[i:i+8].reset_index(drop=True)
+
+state_dfs = {state: df.dropna(subset=['Kraftfahrzeuge \ninsgesamt']) for state, df in state_dfs.items()}
+
+# Anzahl der Ladesäulen je Bundesland in einem Pandas Datensatz
 bundesland_counts = data['Bundesland'].value_counts()
 
 bundesland_counts = data['Bundesland'].value_counts().reset_index()
 bundesland_counts.columns = ['Bundesland', 'Count']
 
-# TODO Datensatz für KFZ einfügen
+all_ev = {
+    state:
+    df['Kraftfahrzeuge \ninsgesamt'].iloc[3] + 
+    df['Kraftfahrzeuge \ninsgesamt'].iloc[5]
+    for state, df in state_dfs.items()}
 
-map = folium.Map(location=[51, 10.5], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
+# Display the results
+# Ensure the column names and dictionary keys match correctly between bundesland_counts and all_ev
+bundesland_counts['EV_Ratio'] = bundesland_counts.apply(
+    lambda row: (row['Count'] / all_ev.get(row['Bundesland'], 1)) * 1000, axis=1
+)
 
-
-
-with open('data\DE_niedrig.geo.json', encoding='utf-8') as f:
-    geodata = json.load(f)
-
+# Display the modified dataframe
+# bundesland_counts
 
 # Anzahl der Ladesäulen zum Geo-Datensatz hinzugefügt, um diesen im Landkarten-Tooltip anzeigbar zu machen
-# TODO Anzahl der Ladensäulen pro 100k Einwohner berechnen und dem Tooltip hunzufügen
-# TODO Anzahl der Ladensäulen pro 1000 EVs berechnen und dem Tooltip hunzufügen
 
-# TODO folium.Layercontrol hinzufügen, wenn möglich
+# Karte erstellen
+map = folium.Map(location=[51, 10.5], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
 
+# Anzahl von Ladestationen (count_evse) und Anzahl von Elektromobilen und Plug-in-Hyriden (ev_count)
+# wird der geodata beigefügt, um diese Daten in den Tooltipps sichtbar zu machen. 
+# Es kann jeweils nur ein Datensatz an das Tooltip Objekt übergeben werden.
 
 for feature in geodata['features']:
     bundesland = feature['properties']['name']
-    count = bundesland_counts.loc[bundesland_counts['Bundesland'] == bundesland, 'Count']
-    feature['properties']['Count'] = int(count) if not count.empty else 0
+    evse_count = bundesland_counts.loc[bundesland_counts['Bundesland'] == bundesland, 'Count']
+    evse_ratio = bundesland_counts.loc[bundesland_counts['Bundesland'] == bundesland, 'Count']
+    feature['properties']['Count'] = int(evse_count.iloc[0]) if not evse_count.empty else 0
+    feature['properties']['EVSE_Ratio'] = int(evse_count.iloc[0]) if not evse_count.empty else 0
+
+    ev_count = (state_dfs[bundesland]['Kraftfahrzeuge \ninsgesamt'][3] +
+                state_dfs[bundesland]['Kraftfahrzeuge \ninsgesamt'][5])
+    feature['properties']['ev_count'] = int(ev_count) #if not ev_count.empty else 0
 
 
-choropleth = folium.Choropleth(
+choropleth1 = folium.Choropleth(
     geo_data=geodata,
-    name="Choropleth",
+    name="Ladensäulen per Bundesland",
     data=bundesland_counts,
     columns=['Bundesland', 'Count'],
     key_on='feature.properties.name',
@@ -59,22 +87,51 @@ choropleth = folium.Choropleth(
     line_opacity=0.2,
     overlay=True,
     control=True,
+    show=True,
     legend_name="Ladesäulen per Bundesland"
 ).add_to(map)
 
 # Add tooltip
-choropleth.geojson.add_child(
+choropleth1.geojson.add_child(
     folium.features.GeoJsonTooltip(
-        fields=['name', 'Count'],
-        aliases=['Bundesland:', 'Anzahl Ladesäulen:'],
+        fields=['name', 'Count', 'ev_count', 'EVSE_Ratio'],
+        aliases=['Bundesland:', 'Anzahl Ladesäulen:', 'Anzahl E-Fahrzeuge:','EVSE pro 1000 E-Fahrzeuge:'],
         labels=True,
-        sticky=False,
+        sticky=True,
         localize=True,
         toLocaleString=True,
         style=("background-color: white; color: black; font-weight: bold;"),
-        tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}</div>"""
+        tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}<br>E-Fahrzeuge: {ev_count}<br>EVSE pro 1000 EV: {EVSE_Ratio}</div>"""
     )
 )
 
+choropleth2 = folium.Choropleth(
+    geo_data=geodata,
+    name="Ladensäulen pro E-Fahrzeug per Bundesland",
+    data=bundesland_counts,
+    columns=['Bundesland', 'EV_Ratio'],
+    key_on='feature.properties.name',
+    fill_color='Blues',
+    fill_opacity=0.7,
+    line_opacity=0.2,
+    overlay=True,
+    control=True,
+    show=False,
+    legend_name="Ladesäulen pro E-Fahrzeug"
+).add_to(map)
+
+choropleth2.geojson.add_child(
+    folium.features.GeoJsonTooltip(
+        fields=['name', 'Count', 'ev_count', 'EVSE_Ratio'],
+        aliases=['Bundesland:', 'Anzahl Ladesäulen:', 'Anzahl E-Fahrzeuge:','EVSE pro 1000 E-Fahrzeuge:'],
+        labels=True,
+        sticky=True,
+        localize=True,
+        toLocaleString=True,
+        style=("background-color: white; color: black; font-weight: bold;"),
+        tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}<br>E-Fahrzeuge: {ev_count}<br>EVSE pro 1000 EV: {EVSE_Ratio}</div>"""
+    )
+)
+folium.LayerControl(collapsed=False, position='bottomleft').add_to(map)
 
 st_map = st_folium(map, width=700, height=650)
