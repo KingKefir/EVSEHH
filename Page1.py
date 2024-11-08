@@ -58,7 +58,7 @@ bundesland_counts['EV_Ratio'] = bundesland_counts.apply(
 # Anzahl der Ladesäulen zum Geo-Datensatz hinzugefügt, um diesen im Landkarten-Tooltip anzeigbar zu machen
 
 # Karte erstellen
-map = folium.Map(location=[51, 10.5], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
+map = folium.Map(location=[52, 10.5], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
 
 # Anzahl von Ladestationen (count_evse) und Anzahl von Elektromobilen und Plug-in-Hyriden (ev_count)
 # wird der geodata beigefügt, um diese Daten in den Tooltipps sichtbar zu machen. 
@@ -67,12 +67,12 @@ map = folium.Map(location=[51, 10.5], zoom_start=6, scrollWheelZoom=False, tiles
 for feature in geodata['features']:
     bundesland = feature['properties']['name']
     evse_count = bundesland_counts.loc[bundesland_counts['Bundesland'] == bundesland, 'Count']
-    evse_ratio = bundesland_counts.loc[bundesland_counts['Bundesland'] == bundesland, 'Count']
+    evse_ratio = bundesland_counts.loc[bundesland_counts['Bundesland'] == bundesland, 'EV_Ratio']
     feature['properties']['Count'] = int(evse_count.iloc[0]) if not evse_count.empty else 0
-    feature['properties']['EVSE_Ratio'] = int(evse_count.iloc[0]) if not evse_count.empty else 0
-
+    feature['properties']['EVSE_Ratio'] = round(float(evse_ratio.iloc[0]), 2) if not evse_ratio.empty else 0
+    
     ev_count = (state_dfs[bundesland]['Kraftfahrzeuge \ninsgesamt'][3] +
-                state_dfs[bundesland]['Kraftfahrzeuge \ninsgesamt'][5])
+                state_dfs[bundesland]['Kraftfahrzeuge \ninsgesamt'][5]) 
     feature['properties']['ev_count'] = int(ev_count) #if not ev_count.empty else 0
 
 
@@ -132,6 +132,8 @@ choropleth2.geojson.add_child(
         tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}<br>E-Fahrzeuge: {ev_count}<br>EVSE pro 1000 EV: {EVSE_Ratio}</div>"""
     )
 )
-folium.LayerControl(collapsed=False, position='bottomleft').add_to(map)
+folium.LayerControl(collapsed=False, position='bottomright').add_to(map)
+
+## TODO kann man die >> o cartodbpositron << von der Layercontrol entfernen?
 
 st_map = st_folium(map, width=700, height=650)
