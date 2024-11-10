@@ -1,0 +1,151 @@
+Unnamed: 0,Modell (Diesel),consumption_per_100km,fuel_type,unit,Modell,kWh/100km
+1,Audi A2 3L (198),36.0,benzin,liter,,
+2,Volkswagen Lupo 3L (343),37.0,benzin,liter,,
+3,Citroen AX (54),42.0,benzin,liter,,
+4,Smart Fortwo (2468),42.0,benzin,liter,,
+5,Citroen C1 (66),43.0,benzin,liter,,
+6,Peugeot 107 (18),43.0,benzin,liter,,
+7,Toyota Aygo (13),46.0,benzin,liter,,
+8,Citroen C4 Cactus (133),47.0,benzin,liter,,
+9,Seat Arosa (100),47.0,benzin,liter,,
+10,Peugeot 208 (328),47.0,benzin,liter,,
+11,Citroen Saxo (117),47.0,benzin,liter,,
+12,Renault Twingo (139),47.0,benzin,liter,,
+13,Fiat 500 (86),48.0,benzin,liter,,
+14,Citroen C3 (455),48.0,benzin,liter,,
+15,Audi A2 (711),48.0,benzin,liter,,
+16,Peugeot 106 (85),48.0,benzin,liter,,
+17,DS Automobiles DS 3 (12),48.0,benzin,liter,,
+18,Toyota iQ (50),48.0,benzin,liter,,
+19,Volkswagen Lupo (194),48.0,benzin,liter,,
+20,Nissan Micra (59),48.0,benzin,liter,,
+21,Citroen C3 Pluriel (29),48.0,benzin,liter,,
+22,Lancia Ypsilon (36),48.0,benzin,liter,,
+23,Hyundai i20 (127),48.0,benzin,liter,,
+24,Toyota Yaris (420),48.0,benzin,liter,,
+25,Fiat Panda (118),49.0,benzin,liter,,
+26,Ford Ka (26),49.0,benzin,liter,,
+27,Kia Picanto (29),49.0,benzin,liter,,
+28,Citroen C2 (162),49.0,benzin,liter,,
+29,Renault Thalia (19),49.0,benzin,liter,,
+30,Fiat Punto (221),49.0,benzin,liter,,
+31,Suzuki Ignis (14),49.0,benzin,liter,,
+32,Fiat Punto Evo (184),50.0,benzin,liter,,
+33,Mazda 2 (104),50.0,benzin,liter,,
+34,Suzuki Splash (13),50.0,benzin,liter,,
+35,Renault Clio (1208),50.0,benzin,liter,,
+36,Volkswagen Fox (50),50.0,benzin,liter,,
+37,Skoda Fabia (1993),50.0,benzin,liter,,
+38,Seat Ibiza ST (89),50.0,benzin,liter,,
+39,Nissan Note (112),50.0,benzin,liter,,
+40,Ford Fiesta (1233),50.0,benzin,liter,,
+41,Volkswagen Polo (3014),50.0,benzin,liter,,
+42,Honda HR-V (47),50.0,benzin,liter,,
+43,Citroen C-Elysée (27),50.0,benzin,liter,,
+44,Peugeot 2008 (184),50.0,benzin,liter,,
+45,Skoda Scala (38),50.0,benzin,liter,,
+46,Hyundai i10 (11),50.0,benzin,liter,,
+47,Nissan Pulsar (66),51.0,benzin,liter,,
+48,Peugeot 1007 (33),51.0,benzin,liter,,
+49,Citroen DS3 (109),51.0,benzin,liter,,
+50,Mini Mini Cooper D (258),51.0,benzin,liter,,
+1,Audi A2 3L (198),36.0,diesel,liter,,
+2,Volkswagen Lupo 3L (343),37.0,diesel,liter,,
+3,Citroen AX (54),42.0,diesel,liter,,
+4,Smart Fortwo (2468),42.0,diesel,liter,,
+5,Citroen C1 (66),43.0,diesel,liter,,
+6,Peugeot 107 (18),43.0,diesel,liter,,
+7,Toyota Aygo (13),46.0,diesel,liter,,
+8,Citroen C4 Cactus (133),47.0,diesel,liter,,
+9,Seat Arosa (100),47.0,diesel,liter,,
+10,Peugeot 208 (328),47.0,diesel,liter,,
+11,Citroen Saxo (117),47.0,diesel,liter,,
+12,Renault Twingo (139),47.0,diesel,liter,,
+13,Fiat 500 (86),48.0,diesel,liter,,
+14,Citroen C3 (455),48.0,diesel,liter,,
+15,Audi A2 (711),48.0,diesel,liter,,
+16,Peugeot 106 (85),48.0,diesel,liter,,
+17,DS Automobiles DS 3 (12),48.0,diesel,liter,,
+18,Toyota iQ (50),48.0,diesel,liter,,
+19,Volkswagen Lupo (194),48.0,diesel,liter,,
+20,Nissan Micra (59),48.0,diesel,liter,,
+21,Citroen C3 Pluriel (29),48.0,diesel,liter,,
+22,Lancia Ypsilon (36),48.0,diesel,liter,,
+23,Hyundai i20 (127),48.0,diesel,liter,,
+24,Toyota Yaris (420),48.0,diesel,liter,,
+25,Fiat Panda (118),49.0,diesel,liter,,
+26,Ford Ka (26),49.0,diesel,liter,,
+27,Kia Picanto (29),49.0,diesel,liter,,
+28,Citroen C2 (162),49.0,diesel,liter,,
+29,Renault Thalia (19),49.0,diesel,liter,,
+30,Fiat Punto (221),49.0,diesel,liter,,
+31,Suzuki Ignis (14),49.0,diesel,liter,,
+32,Fiat Punto Evo (184),50.0,diesel,liter,,
+33,Mazda 2 (104),50.0,diesel,liter,,
+34,Suzuki Splash (13),50.0,diesel,liter,,
+35,Renault Clio (1208),50.0,diesel,liter,,
+36,Volkswagen Fox (50),50.0,diesel,liter,,
+37,Skoda Fabia (1993),50.0,diesel,liter,,
+38,Seat Ibiza ST (89),50.0,diesel,liter,,
+39,Nissan Note (112),50.0,diesel,liter,,
+40,Ford Fiesta (1233),50.0,diesel,liter,,
+41,Volkswagen Polo (3014),50.0,diesel,liter,,
+42,Honda HR-V (47),50.0,diesel,liter,,
+43,Citroen C-Elysée (27),50.0,diesel,liter,,
+44,Peugeot 2008 (184),50.0,diesel,liter,,
+45,Skoda Scala (38),50.0,diesel,liter,,
+46,Hyundai i10 (11),50.0,diesel,liter,,
+47,Nissan Pulsar (66),51.0,diesel,liter,,
+48,Peugeot 1007 (33),51.0,diesel,liter,,
+49,Citroen DS3 (109),51.0,diesel,liter,,
+50,Mini Mini Cooper D (258),51.0,diesel,liter,,
+1,,,electricity,kWh,Peugeot iOn (28),132.0
+2,,,electricity,kWh,Dacia Spring (117),141.0
+3,,,electricity,kWh,Volkswagen Up! (243),141.0
+4,,,electricity,kWh,Mitsubishi i-MiEV (24),143.0
+5,,,electricity,kWh,Hyundai IONIQ (227),143.0
+6,,,electricity,kWh,Citroen C-Zero (28),146.0
+7,,,electricity,kWh,Citroen Saxo (11),146.0
+8,,,electricity,kWh,Volkswagen Golf (224),148.0
+9,,,electricity,kWh,Smart Fortwo (177),148.0
+10,,,electricity,kWh,Renault Twingo (74),149.0
+11,,,electricity,kWh,Skoda Citigo (61),150.0
+12,,,electricity,kWh,Seat Mii (34),151.0
+13,,,electricity,kWh,Smart Forfour (50),153.0
+14,,,electricity,kWh,Hyundai Kona (277),159.0
+15,,,electricity,kWh,Renault Scenic (11),163.0
+16,,,electricity,kWh,Nissan Leaf (185),163.0
+17,,,electricity,kWh,BMW i3 (305),164.0
+18,,,electricity,kWh,Fiat 500 (173),165.0
+19,,,electricity,kWh,Renault Megane (73),165.0
+20,,,electricity,kWh,Opel Ampera (24),166.0
+21,,,electricity,kWh,Renault ZOE (511),167.0
+22,,,electricity,kWh,Kia Soul (68),168.0
+23,,,electricity,kWh,Mini Mini Cooper SE (129),171.0
+24,,,electricity,kWh,Kia Niro (174),172.0
+25,,,electricity,kWh,Opel Corsa (131),173.0
+26,,,electricity,kWh,Opel Mokka (50),175.0
+27,,,electricity,kWh,MG ZS (37),175.0
+28,,,electricity,kWh,Peugeot 208 (97),177.0
+29,,,electricity,kWh,Renault Fluence (11),178.0
+30,,,electricity,kWh,Hyundai Ioniq 6 (34),180.0
+31,,,electricity,kWh,Citroen C4 (27),181.0
+32,,,electricity,kWh,MG MG4 (106),182.0
+33,,,electricity,kWh,Tesla Motors Model 3 (701),183.0
+34,,,electricity,kWh,Volkswagen ID.7 (18),183.0
+35,,,electricity,kWh,Toyota bZ4X (22),183.0
+36,,,electricity,kWh,MG MG5 (25),184.0
+37,,,electricity,kWh,Volkswagen ID.3 (210),185.0
+38,,,electricity,kWh,Cupra Born (127),186.0
+39,,,electricity,kWh,Mazda MX-30 (52),189.0
+40,,,electricity,kWh,Peugeot 2008 (37),189.0
+41,,,electricity,kWh,BYD Atto 3 (23),191.0
+42,,,electricity,kWh,Tesla Motors Model Y (363),197.0
+43,,,electricity,kWh,Volkswagen ID.5 (38),197.0
+44,,,electricity,kWh,Honda Honda e (18),198.0
+45,,,electricity,kWh,Volvo EX30 (15),198.0
+46,,,electricity,kWh,Ora Funky Cat (14),199.0
+47,,,electricity,kWh,BMW iX1 (44),199.0
+48,,,electricity,kWh,Mercedes-Benz EQE (27),200.0
+49,,,electricity,kWh,Volkswagen ID.4 (141),201.0
+50,,,electricity,kWh,Hyundai Ioniq 5 (171),205.0
