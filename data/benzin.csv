@@ -1,51 +1,51 @@
-Unnamed: 0,Modell (Diesel),l/100km
-1,Audi A2 3L (198),3.6
-2,Volkswagen Lupo 3L (343),3.7
-3,Citroen AX (54),4.2
-4,Smart Fortwo (2468),4.2
-5,Citroen C1 (66),4.3
-6,Peugeot 107 (18),4.3
-7,Toyota Aygo (13),4.6
-8,Citroen C4 Cactus (133),4.7
-9,Seat Arosa (100),4.7
-10,Peugeot 208 (328),4.7
-11,Citroen Saxo (117),4.7
-12,Renault Twingo (139),4.7
-13,Fiat 500 (86),4.8
-14,Citroen C3 (455),4.8
-15,Audi A2 (711),4.8
-16,Peugeot 106 (85),4.8
-17,DS Automobiles DS 3 (12),4.8
-18,Toyota iQ (50),4.8
-19,Volkswagen Lupo (194),4.8
-20,Nissan Micra (59),4.8
-21,Citroen C3 Pluriel (29),4.8
-22,Lancia Ypsilon (36),4.8
-23,Hyundai i20 (127),4.8
-24,Toyota Yaris (420),4.8
-25,Fiat Panda (118),4.9
-26,Ford Ka (26),4.9
-27,Kia Picanto (29),4.9
-28,Citroen C2 (162),4.9
-29,Renault Thalia (19),4.9
-30,Fiat Punto (221),4.9
-31,Suzuki Ignis (14),4.9
-32,Fiat Punto Evo (184),5.0
-33,Mazda 2 (104),5.0
-34,Suzuki Splash (13),5.0
-35,Renault Clio (1208),5.0
-36,Volkswagen Fox (50),5.0
-37,Skoda Fabia (1993),5.0
-38,Seat Ibiza ST (89),5.0
-39,Nissan Note (112),5.0
-40,Ford Fiesta (1233),5.0
-41,Volkswagen Polo (3014),5.0
-42,Honda HR-V (47),5.0
-43,Citroen C-Elysée (27),5.0
-44,Peugeot 2008 (184),5.0
-45,Skoda Scala (38),5.0
-46,Hyundai i10 (11),5.0
-47,Nissan Pulsar (66),5.1
-48,Peugeot 1007 (33),5.1
-49,Citroen DS3 (109),5.1
-50,Mini Mini Cooper D (258),5.1
+Unnamed: 0,Modell (Benzin),l/100km
+1,Toyota Yaris Cross (343),4.6
+2,Suzuki Celerio (92),4.6
+3,Toyota Yaris Hybrid (2342),4.8
+4,Hyundai IONIQ (536),4.8
+5,Suzuki Swace (100),4.9
+6,Honda Jazz Hybrid (290),5.0
+7,Kia Niro (737),5.1
+8,Nissan Pixo (64),5.1
+9,Toyota Prius (3427),5.1
+10,Daihatsu Cuore (578),5.2
+11,Citroen C1 (1060),5.2
+12,Toyota Corolla Hybrid (1949),5.2
+13,Skoda Citigo (671),5.2
+14,Seat Mii (398),5.3
+15,Honda Insight (274),5.3
+16,Toyota Corolla Cross (112),5.3
+17,Toyota Aygo (1623),5.3
+18,Toyota Auris Hybrid (3165),5.4
+19,Toyota C-HR (1207),5.4
+20,Peugeot 107 (582),5.4
+21,Volkswagen Up! (1557),5.4
+22,Lexus CT 200h (418),5.4
+23,Daihatsu Trevis (55),5.4
+24,Peugeot 108 (107),5.4
+25,Lexus UX 250h (101),5.6
+26,Suzuki Alto (249),5.6
+27,Mitsubishi Space Star (615),5.6
+28,Honda Civic Hybrid (294),5.7
+29,Smart Roadster (715),5.7
+30,Toyota Prius Plus (444),5.7
+31,Volkswagen Jetta Hybrid (25),5.7
+32,Lexus ES 300h (33),5.8
+33,Toyota iQ (263),5.8
+34,Opel Karl (88),5.8
+35,Skoda Scala (324),5.9
+36,Suzuki Ignis (317),5.9
+37,Smart Fortwo (5396),6.0
+38,Honda CR-Z (144),6.0
+39,Citroen C4 Cactus (146),6.0
+40,Daihatsu Sirion (265),6.0
+41,Suzuki Baleno (163),6.0
+42,Fiat 126 (47),6.1
+43,Skoda Rapid (692),6.1
+44,Hyundai i10 (1045),6.1
+45,Toyota Yaris (2013),6.1
+46,Honda Jazz (1208),6.2
+47,Kia Picanto (868),6.2
+48,Renault Twingo (2363),6.2
+49,Hyundai Bayon (43),6.2
+50,Suzuki Splash (153),6.2
