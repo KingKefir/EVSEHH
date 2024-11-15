@@ -6,7 +6,7 @@ from ckanapi import RemoteCKAN
 
 
 
-def show():
+def app():
     st.title("Page 7")
     st.write("This is Page 7.")
     # Streamlit app title and description

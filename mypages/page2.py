@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re
 
-def show():
+def app():
     st.title("Page 2")
     st.write("This is Page 2.")
     # Load CSV files

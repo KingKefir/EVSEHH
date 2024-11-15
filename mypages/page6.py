@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-def show():
+def app():
     st.title("Page 6")
     st.write("This is Page 6.")
     # Load CSV files

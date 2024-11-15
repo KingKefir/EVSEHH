@@ -6,7 +6,7 @@ import json
 
 
 
-def show():
+def app():
 
     APP_TITLE = 'LEROM IPSUM'
     APP_SUB_TITLE = 'Ipsum Ipsum'

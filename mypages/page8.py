@@ -5,7 +5,7 @@ import seaborn as sns
 import streamlit as st
 from ckanapi import RemoteCKAN
 
-def show():
+def app():
     st.title("Page 8")
     st.write("This is Page 8.")
 
