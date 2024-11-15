@@ -4,22 +4,19 @@ import plotly.graph_objects as go
 import warnings
 import streamlit as st
 import base64
+from mypages import sub_p0, sub_p1, sub_p2,sub_p3, Page1, page3, page6, page7, page8
 
 warnings.filterwarnings("ignore")
 
 # Daten laden
-data = pd.read_csv("ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
-# Unnötige Spalten entfernen
-data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4' ])
-data = data.dropna(subset=['Inbetriebnahmedatum'])
-data = data.dropna(subset=['Betreiber'])
+# data = pd.read_csv("data\ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
+# # Unnötige Spalten entfernen
+# data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4' ])
+# data = data.dropna(subset=['Inbetriebnahmedatum'])
+# data = data.dropna(subset=['Betreiber'])
 
 # 'Betreiber', 'Straße', 'Hausnummer', 'Adresszusatz', 'Postleitzahl','Ort', 'Bundesland', 'Kreis/kreisfreie Stadt', 'Breitengrad','Längengrad', 'Inbetriebnahmedatum','Nennleistung Ladeeinrichtung [kW]', 'Art der Ladeeinrichung','Anzahl Ladepunkte', 'Steckertypen1', 'P1 [kW]', 'Public Key1','Steckertypen2', 'P2 [kW]', 'Public Key2', 'Steckertypen3', 'P3 [kW]','Public Key3', 'Steckertypen4', 'P4 [kW]', 'Public Key4'],
 
-import sub_p0
-import sub_p1
-import sub_p2
-import sub_p3
 
 # HTML für Titel mit Rahmen und anderer Schriftart
 title_html = """
@@ -43,13 +40,12 @@ pages = {
     "0. Startseite": sub_p0,
     "1. Überblick über die Daten": sub_p1,
     "2. Erster Ansatz: Analyse mit SQL und Tableau": sub_p2,
-    "3. Analyse der Ladesäulen": sub_p3
+    "3. Analyse der Ladesäulen": sub_p3,
+    "4. titel": Page1,
+    "5. titel": page8
         }
 
-    # "Analyse der Ladesäulen in ausgewählten Städten / Kreisen",
-    #  "Analyse der Betreiberdaten"])
 
 st.sidebar.title("Navigation")
 select = st.sidebar.radio("Gehe zu:", list(pages.keys()))
 pages[select].app()
-

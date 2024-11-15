@@ -13,8 +13,8 @@ def show():
     
     st.title(APP_TITLE)
     # EVSE Daten der Bundesnetzagentur
-    file_path = 'data\\ladesaeulenregister_Bundesnetzagentur_2024.csv'
-    data = pd.read_csv(file_path, sep=';', skiprows=10, low_memory=False)
+    file_path = 'data\\ladesaeulenregister.csv'
+    data = pd.read_csv(file_path, delimiter=';', low_memory=False)
 
     with open('data\\DE_niedrig.geo.json', encoding='utf-8') as f:
         geodata = json.load(f)
