@@ -3,9 +3,9 @@ import pandas as pd
 
 def app():
     # Load CSV files
-    file_1 = 'data\\benzin.csv'
-    file_2 = 'data\\diesel.csv'
-    file_3 = 'data\\elektro.csv'
+    file_1 = 'data/benzin.csv'
+    file_2 = 'data/diesel.csv'
+    file_3 = 'data/elektro.csv'
     
     APP_TITLE = 'Verbrauchskostenrechner'
     

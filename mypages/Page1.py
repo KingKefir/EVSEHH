@@ -12,14 +12,14 @@ def app():
     
     st.title(APP_TITLE)
     # EVSE Daten der Bundesnetzagentur
-    file_path = 'data\\ladesaeulenregister.csv'
+    file_path = 'data/ladesaeulenregister.csv'
     data = pd.read_csv(file_path, delimiter=';', low_memory=False)
 
-    with open('data\\DE_niedrig.geo.json', encoding='utf-8') as f:
+    with open('data/DE_niedrig.geo.json', encoding='utf-8') as f:
         geodata = json.load(f)
 
     # KFZ Daten der Bundesländer
-    kfzxl = 'data\\fz27_202210.xlsx'
+    kfzxl = 'data/fz27_202210.xlsx'
     kfzdf = pd.read_excel(kfzxl, sheet_name='FZ 27.2', header=7, usecols='B,C,M')
 
 

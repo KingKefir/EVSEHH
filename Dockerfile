@@ -1,6 +1,5 @@
 # Use the official Python image as the base image
-FROM python:3.9
-
+FROM python:3.12
 # Set the working directory inside the container
 WORKDIR /app
 
@@ -17,4 +16,4 @@ COPY . .
 EXPOSE 8501
 
 # Command to run the Streamlit app
-CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS=false"]
+CMD ["streamlit", "run", "main_ladeinfrastr_ger.py", "--server.port=8501"]
