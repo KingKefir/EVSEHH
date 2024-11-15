@@ -17,7 +17,7 @@ warnings.filterwarnings("ignore")
 
 # 'Betreiber', 'Straße', 'Hausnummer', 'Adresszusatz', 'Postleitzahl','Ort', 'Bundesland', 'Kreis/kreisfreie Stadt', 'Breitengrad','Längengrad', 'Inbetriebnahmedatum','Nennleistung Ladeeinrichtung [kW]', 'Art der Ladeeinrichung','Anzahl Ladepunkte', 'Steckertypen1', 'P1 [kW]', 'Public Key1','Steckertypen2', 'P2 [kW]', 'Public Key2', 'Steckertypen3', 'P3 [kW]','Public Key3', 'Steckertypen4', 'P4 [kW]', 'Public Key4'],
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="Ladeinfrastrukturanalyse von Petra und Roman")
 # HTML für Titel mit Rahmen und anderer Schriftart
 title_html = """
     <div style="
