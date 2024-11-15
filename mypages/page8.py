@@ -6,14 +6,15 @@ import streamlit as st
 from ckanapi import RemoteCKAN
 
 def app():
-    st.title("Page 8")
-    st.write("This is Page 8.")
+    APP_TITLE = 'Reichweiten- und Effizienzanalyse'
+    
+    st.title(APP_TITLE)
 
     # Streamlit app title and description
     # st.set_page_config(layout="wide")
     st.title("Electric Vehicle Time Series Analysis")
     st.write("""
-    This application retrieves EV data from a CKAN API, processes it, and provides a time series analysis of range and energy consumption.
+    Hier nutzen wir öffentliche Kanadische Daten welche mittel CKAN API zur Verfügung gestellt werden.
     """)
     # Configure CKAN API URL and Dataset ID
     API_URL = "https://open.canada.ca/data/en/"
@@ -38,9 +39,9 @@ def app():
 
     # Sidebar filters
     st.sidebar.header("Filter Options")
-    make_filter = st.sidebar.multiselect("Select Make", options=df['Make'].unique(), default=df['Make'].unique())
-    year_filter = st.sidebar.slider("Select Model Year", int(df['Model year'].min()), int(df['Model year'].max()), (int(df['Model year'].min()), int(df['Model year'].max())))
-    class_filter = st.sidebar.multiselect("Select Vehicle Class", options=df['Vehicle class'].unique(), default=df['Vehicle class'].unique())
+    make_filter = st.sidebar.multiselect("Marke auswählen", options=df['Make'].unique(), default=df['Make'].unique())
+    year_filter = st.sidebar.slider("Baujahr der Modells auswählen", int(df['Model year'].min()), int(df['Model year'].max()), (int(df['Model year'].min()), int(df['Model year'].max())))
+    class_filter = st.sidebar.multiselect("Fahrzeugtyp auswählen", options=df['Vehicle class'].unique(), default=df['Vehicle class'].unique())
 
     # Apply filters to DataFrame
     filtered_df = df[(df['Make'].isin(make_filter)) &
@@ -49,24 +50,24 @@ def app():
                     (df['Vehicle class'].isin(class_filter))]
 
     # Range vs. Efficiency Plot
-    st.header("Range vs Efficiency (kWh/100 km)")
+    st.header("Reichweite - Wirkungsgrad (kWh/100 km)")
     fig1 = px.scatter(filtered_df, x='Combined (kWh/100 km)', y='Range (km)',
                     color='Make', hover_data=['Model year', 'Model'],
                     labels={'Combined (kWh/100 km)': 'Combined Consumption (kWh/100 km)',
                             'Range (km)': 'Range (km)'},
-                    title="Range vs Combined Consumption by Make")
+                    title="Reichweite gegenüber Gesamtverbraucht je Marke")
     st.plotly_chart(fig1)
 
     # Motor Power by Year Plot
     st.header("Motor Power over Model Years")
     fig2 = px.line(filtered_df, x='Model year', y='Motor (kW)', color='Make',
                 labels={'Model year': 'Model Year', 'Motor (kW)': 'Motor Power (kW)'},
-                title="Motor Power over Model Years")
+                title="Leistung gegenüber Baujahr")
     st.plotly_chart(fig2)
 
     # Range Distribution by Vehicle Class
     st.header("Range Distribution by Vehicle Class")
     fig3 = px.box(filtered_df, x='Vehicle class', y='Range (km)', color='Vehicle class',
                 labels={'Vehicle class': 'Vehicle Class', 'Range (km)': 'Range (km)'},
-                title="Range Distribution by Vehicle Class")
+                title="Reichweitenverteilung je Fahrzeugtyp")
     st.plotly_chart(fig3)

@@ -7,12 +7,13 @@ from ckanapi import RemoteCKAN
 
 
 def app():
-    st.title("Page 7")
-    st.write("This is Page 7.")
+    APP_TITLE = 'Zeitreihenanalyse Kanadischer Daten'
+    
+    st.title(APP_TITLE)
     # Streamlit app title and description
-    st.title("Electric Vehicle Time Series Analysis")
+    st.subheader("Electric Vehicle Time Series Analysis", divider=True)
     st.write("""
-    This application retrieves EV data from a CKAN API, processes it, and provides a time series analysis of range and energy consumption.
+    Hier nutzen wir öffentliche Kanadische Daten welche mittel CKAN API zur Verfügung gestellt werden.
     """)
     # Configure CKAN API URL and Dataset ID
     API_URL = "https://open.canada.ca/data/en/"
@@ -59,7 +60,7 @@ def app():
         st.write(df)
 
     # Plotting with Matplotlib and Seaborn
-    st.subheader("Time Series Analysis of Electric Vehicles")
+    st.subheader("Zeitreihenanalyse von Elektrofahrzeugen")
 
     # Set the plot style
     sns.set(style="whitegrid")
@@ -69,14 +70,14 @@ def app():
 
     # Plot Range (km) over Model Year
     sns.lineplot(data=df_yearly, x='Model year', y='Range (km)', ax=ax[0], marker='o', color='b')
-    ax[0].set_title('Average EV Range Over Model Years')
-    ax[0].set_ylabel('Range (km)')
+    ax[0].set_title('Durchschnittliche Reichweite je Modell(Jahr)')
+    ax[0].set_ylabel('Reichweite (km)')
 
     # Plot Combined (kWh/100 km) over Model Year
     sns.lineplot(data=df_yearly, x='Model year', y='Combined (kWh/100 km)', ax=ax[1], marker='o', color='r')
-    ax[1].set_title('Average EV Combined Consumption Over Model Years')
-    ax[1].set_ylabel('Combined Consumption (kWh/100 km)')
-    ax[1].set_xlabel('Model Year')
+    ax[1].set_title('Durchschnittlicher EV-Gesamtverbrauch je Modell(Jahr)')
+    ax[1].set_ylabel('Gesamtverbrauch (kWh/100 km)')
+    ax[1].set_xlabel('Modell (Jahr)')
 
     # Display plot in Streamlit
     st.pyplot(fig)

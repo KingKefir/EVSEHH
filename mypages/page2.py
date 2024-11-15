@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 import re
 
 def app():
-    st.title("Page 2")
-    st.write("This is Page 2.")
+    
+    APP_TITLE = 'Vergleich ICEV und BEV'
+    
+    st.title(APP_TITLE)
+
     # Load CSV files
     fuel_data_liter1 = pd.read_csv("data\\benzin.csv")  # Replace with your file path
     fuel_data_liter2 = pd.read_csv("data\\diesel.csv")  # Replace with your file path

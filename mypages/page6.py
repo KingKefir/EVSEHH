@@ -2,13 +2,14 @@ import streamlit as st
 import pandas as pd
 
 def app():
-    st.title("Page 6")
-    st.write("This is Page 6.")
     # Load CSV files
     file_1 = 'data\\benzin.csv'
     file_2 = 'data\\diesel.csv'
     file_3 = 'data\\elektro.csv'
-
+    
+    APP_TITLE = 'Verbrauchskostenrechner'
+    
+    st.title(APP_TITLE)
     # Function to load and process each file with a given multiplier
     def load_data(file, multiplier):
         # Load CSV file
@@ -20,13 +21,13 @@ def app():
 
     # Title
     # st.set_page_config(layout="wide")
-    st.title("Verbrauch je Marke/Modell und Kostenberechnung pro 100km")
+    st.subheader("Verbrauch je Marke/Modell und Kostenberechnung pro 100km", divider=True)
     title = "spritmonitor.de"
     link = "https://www.spritmonitor.de/de/auswertungen.html"
     st.markdown(f"Unten sind die laut [{title}]({link}) 50 sparsamsten Fahrzeuge in den Kategorien Benzin, Diesel und BEV.")
 
     # Set default values for each table
-    default_values = [1.78, 1.88, 0.44]
+    default_values = [1.73, 1.83, 0.44]
 
     # Create columns for side-by-side display
     cols = st.columns(3)

@@ -8,8 +8,7 @@ import json
 
 def app():
 
-    APP_TITLE = 'LEROM IPSUM'
-    APP_SUB_TITLE = 'Ipsum Ipsum'
+    APP_TITLE = 'Ladesäulen in Deutschland'
     
     st.title(APP_TITLE)
     # EVSE Daten der Bundesnetzagentur
@@ -53,8 +52,6 @@ def app():
         lambda row: (row['Count'] / all_ev.get(row['Bundesland'], 1)) * 1000, axis=1
     )
 
-    # Display the modified dataframe
-    # bundesland_counts
 
     # Anzahl der Ladesäulen zum Geo-Datensatz hinzugefügt, um diesen im Landkarten-Tooltip anzeigbar zu machen
 

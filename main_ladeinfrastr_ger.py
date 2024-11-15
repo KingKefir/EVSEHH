@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import warnings
 import streamlit as st
 import base64
-from mypages import sub_p0, sub_p1, sub_p2,sub_p3, Page1, page3, page6, page7, page8
+from mypages import sub_p0, sub_p1, sub_p2,sub_p3, Page1, page6, page7, page8
 
 warnings.filterwarnings("ignore")
 
@@ -17,7 +17,7 @@ warnings.filterwarnings("ignore")
 
 # 'Betreiber', 'Straße', 'Hausnummer', 'Adresszusatz', 'Postleitzahl','Ort', 'Bundesland', 'Kreis/kreisfreie Stadt', 'Breitengrad','Längengrad', 'Inbetriebnahmedatum','Nennleistung Ladeeinrichtung [kW]', 'Art der Ladeeinrichung','Anzahl Ladepunkte', 'Steckertypen1', 'P1 [kW]', 'Public Key1','Steckertypen2', 'P2 [kW]', 'Public Key2', 'Steckertypen3', 'P3 [kW]','Public Key3', 'Steckertypen4', 'P4 [kW]', 'Public Key4'],
 
-
+st.set_page_config(layout="wide")
 # HTML für Titel mit Rahmen und anderer Schriftart
 title_html = """
     <div style="
@@ -41,8 +41,10 @@ pages = {
     "1. Überblick über die Daten": sub_p1,
     "2. Erster Ansatz: Analyse mit SQL und Tableau": sub_p2,
     "3. Analyse der Ladesäulen": sub_p3,
-    "4. titel": Page1,
-    "5. titel": page8
+    "4. Ladesäulen in Deutschland": Page1,
+    "6. Verbrauchsrechner": page6,
+    "7. Zeitreihenanalyse Kanadischer Daten": page7,
+    "8. Reichweiten- und Effizienzanalyse": page8
         }
 
 
