@@ -23,8 +23,12 @@ def app():
     # st.set_page_config(layout="wide")
     st.subheader("Verbrauch je Marke/Modell und Kostenberechnung pro 100km", divider=True)
     title = "spritmonitor.de"
+    adaclink = "https://assets.adac.de/Autodatenbank/Autokosten/E-AutosVergleich.pdf"
     link = "https://www.spritmonitor.de/de/auswertungen.html"
-    st.markdown(f"Unten sind die laut [{title}]({link}) 50 sparsamsten Fahrzeuge in den Kategorien Benzin, Diesel und BEV.")
+    st.markdown(f'''
+    Unten sind die laut [{title}]({link}) 50 sparsamsten Fahrzeuge in den Kategorien Benzin, Diesel und BEV.
+    Die Rechengrundlage orientiert sich am [ADAC Kostenvergleich]({adaclink})
+    ''')
 
     # Set default values for each table
     default_values = [1.73, 1.83, 0.44]
