@@ -1,12 +1,7 @@
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-import warnings
 import streamlit as st
-import base64
-from mypages import sub_p0, sub_p1, sub_p2,sub_p3, Page1, page6, page7, page8
 
-warnings.filterwarnings("ignore")
+from mypages import sub_p0, sub_p1, sub_p2, sub_p3, sub_p4, sub_p5, sub_p6, sub_p_eu, sub_p_map, Page1, page6, page7, page8
+
 
 # Daten laden
 # data = pd.read_csv("data\ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
@@ -38,13 +33,18 @@ st.markdown(title_html, unsafe_allow_html=True)
 
 pages = {
     "0. Startseite": sub_p0,
-    "1. Überblick über die Daten": sub_p1,
-    "2. Erster Ansatz: Analyse mit SQL und Tableau": sub_p2,
-    "3. Analyse der Ladesäulen": sub_p3,
-    "4. Ladesäulen in Deutschland": Page1,
-    "6. Verbrauchsrechner": page6,
-    "7. Zeitreihenanalyse Kanadischer Daten": page7,
-    "8. Reichweiten- und Effizienzanalyse": page8
+    "1. Einordnung: Deutschland und seine Nachbarländer (2023)": sub_p_eu,
+    "2. Überblick über die Daten": sub_p1,
+    "3. Erster Ansatz: Analyse mit SQL und Tableau": sub_p2,
+    "4. Karte: Karte - Anzahl der Ladesäulen nach Jahren": sub_p_map,
+    "5. Analyse der Ladesäulen": sub_p3,
+    "6. Ladesäulen nach Anzahl der Ladepunkte": sub_p4,
+    "7. Ladeplätze nach Leistung": sub_p5,
+    "8. Steckertypen": sub_p6,
+    "9. Ladesäulen in Deutschland": Page1,
+    "10. Verbrauchsrechner": page6,
+    "11. Zeitreihenanalyse Kanadischer Daten": page7,
+    "12. Reichweiten- und Effizienzanalyse": page8
         }
 
 

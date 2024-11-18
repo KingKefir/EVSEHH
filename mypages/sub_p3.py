@@ -4,34 +4,40 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # Daten laden
-data = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip", low_memory=False)
+data = pd.read_csv("ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
 # Unnötige Spalten entfernen
 data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4'])
 data = data.dropna(subset=['Inbetriebnahmedatum', 'Betreiber', 'Bundesland'])
 
 # App-Definition
 def app():
-    st.title("Analyse der Ladestationen")
+    st.title("Anzahl der Ladesäulen")
 
-    # 1. Jahr der Inbetriebnahme in neue Spalte
+    st.subheader("Anzahl Ladesäulen in Deutschland - ab 2007")
+
+    # Jahr der Inbetriebnahme in neue Spalte
     data['Inbetriebnahmejahr'] = pd.to_datetime(data['Inbetriebnahmedatum'], format='%d.%m.%Y', errors='coerce').dt.year
 
-    # 2. Anzahl der neu in Betrieb genommenen Ladesäulen pro Jahr berechnen
-    lasta_neu_pro_jahr = data.groupby('Inbetriebnahmejahr').size().reset_index(name='neu_inbetrieb_genommene')
+    # Fliler: Nur Daten ab 2007, da vorher nicht durchgängig
+    ab_2007 = data["Inbetriebnahmejahr"]>=2007
+    data_ab_2007 = data[ab_2007]
+
+    # Anzahl der neu in Betrieb genommenen Ladesäulen pro Jahr berechnen
+    lasta_neu_pro_jahr = data_ab_2007.groupby('Inbetriebnahmejahr').size().reset_index(name='neu_inbetrieb_genommene')
     lasta_neu_pro_jahr = lasta_neu_pro_jahr.dropna()
 
-    # 3. Kumulative Anzahl der Ladesäulen berechnen
+    # Kumulative Anzahl der Ladesäulen berechnen
     lasta_neu_pro_jahr['kumulative_anzahl'] = lasta_neu_pro_jahr['neu_inbetrieb_genommene'].cumsum()
 
-    # 4. Prozentuale Zunahme für ganz Deutschland berechnen
-    lasta_neu_pro_jahr['wachstum_prozent'] = lasta_neu_pro_jahr['neu_inbetrieb_genommene'].pct_change() * 100
+    # Prozentuale Zunahme für ganz Deutschland berechnen
+    lasta_neu_pro_jahr['wachstum_prozent'] = lasta_neu_pro_jahr['kumulative_anzahl'].pct_change() * 100
 
     # 5. Prozentuale Zunahme und kumulative Anzahl für jedes Bundesland berechnen
-    bundeslandzahlen = data.groupby(['Bundesland', 'Inbetriebnahmejahr']).size().reset_index(name='anzahl')
+    bundeslandzahlen = data_ab_2007.groupby(['Bundesland', 'Inbetriebnahmejahr']).size().reset_index(name='anzahl')
     bundeslandzahlen['kumulative_anzahl'] = bundeslandzahlen.groupby('Bundesland')['anzahl'].cumsum()
-    bundeslandzahlen['wachstum_prozent'] = bundeslandzahlen.groupby('Bundesland')['anzahl'].pct_change() * 100
+    bundeslandzahlen['wachstum_prozent'] = bundeslandzahlen.groupby('Bundesland')['kumulative_anzahl'].pct_change() * 100
 
-    # 4. Diagramm der neu in Betrieb genommenen Ladesäulen pro Jahr
+    # Diagramm - neu in Betrieb genommene Ladesäulen pro Jahr
     fig_new = px.bar(
         lasta_neu_pro_jahr,
         x='Inbetriebnahmejahr',
@@ -41,10 +47,8 @@ def app():
         color='neu_inbetrieb_genommene',
         color_continuous_scale='Viridis'
     )
-    fig_new.update_layout(xaxis_title="Jahr", yaxis_title="Anzahl neuer Ladesäulen")
     
-
-    # 5. Diagramm der kumulativen Anzahl von Ladesäulen nach Jahren
+    # Diagramm der kumulativen Anzahl von Ladesäulen nach Jahren
     fig_cumulative = px.bar(
         lasta_neu_pro_jahr,
         x='Inbetriebnahmejahr',
@@ -54,38 +58,29 @@ def app():
         color='kumulative_anzahl',
         color_continuous_scale='Viridis'
     )
-    fig_cumulative.update_layout(xaxis_title="Jahr", yaxis_title="Gesamtanzahl der Ladesäulen")
+    
+    
+    # Prozentuales Wachstum von Jahr zu Jahr
+    fig_percent = px.bar(
+        lasta_neu_pro_jahr,
+        x='Inbetriebnahmejahr',
+        y='wachstum_prozent',
+        title="Prozentuale Zunahme der Ladesäulen im Vergleich zum Vorjahr",
+        labels={'Inbetriebnahmejahr': 'Jahr', 'wachstum_prozent': 'Prozentuale Zunahme'},
+        color='wachstum_prozent',
+        color_continuous_scale='Viridis'
+    )
     
     
     st.plotly_chart(fig_new)
     
     st.plotly_chart(fig_cumulative)
 
-    # Plot für die kumulative Anzahl der Ladesäulen in ganz Deutschland
-    fig1 = go.Figure()
-    fig1.add_trace(go.Scatter(
-        x=lasta_neu_pro_jahr['Inbetriebnahmejahr'], 
-        y=lasta_neu_pro_jahr['kumulative_anzahl'],
-        mode='lines+markers',
-        name='Kumulative Anzahl Ladesäulen'
-    ))
-    fig1.update_layout(title="Kumulative Anzahl der Ladesäulen in Deutschland",
-                    xaxis_title="Jahr",
-                    yaxis_title="Kumulative Anzahl")
-    
-    st.plotly_chart(fig1)
+    st.plotly_chart(fig_percent)
 
-    # Plot für die prozentuale Wachstumsrate in ganz Deutschland
-    fig2 = go.Figure()
-    fig2.add_trace(go.Bar(
-        x=lasta_neu_pro_jahr['Inbetriebnahmejahr'], 
-        y=lasta_neu_pro_jahr['wachstum_prozent'],
-        name='Wachstumsrate (%)'
-    ))
-    fig2.update_layout(title="Prozentuale Zunahme der Ladesäulen in Deutschland",
-                    xaxis_title="Jahr",
-                    yaxis_title="Wachstumsrate (%)")
-    st.plotly_chart(fig2)
+    
+
+    st.subheader("Anzahl Ladesäulen nach Bundesland ab 2007")
 
     # Interaktiver Plot für die kumulative Anzahl und Wachstumsrate pro Bundesland
     selected_bundesland = st.selectbox("Wählen Sie ein Bundesland", bundeslandzahlen['Bundesland'].unique())
@@ -93,12 +88,21 @@ def app():
     # Filter für ausgewähltes Bundesland
     bundesland_data = bundeslandzahlen[bundeslandzahlen['Bundesland'] == selected_bundesland]
 
+    fig2 = px.bar(
+        bundesland_data,
+        x='Inbetriebnahmejahr',
+        y='anzahl',
+        title=f"Neue in Betrieb genommene Ladesäulen pro Jahr in {selected_bundesland}",
+        )
+    fig2.update_layout(xaxis_title="Jahr", yaxis_title="Anzahl neuer Ladestellen")
+    st.plotly_chart(fig2)
+    
     # Plot für kumulative Anzahl im ausgewählten Bundesland
-    fig3 = px.line(
+    fig3 = px.bar(
         bundesland_data, 
         x="Inbetriebnahmejahr", 
         y="kumulative_anzahl", 
-        title=f"Kumulative Anzahl der Ladesäulen in {selected_bundesland}"
+        title=f"Gesamtanzahl der Ladesäulen in {selected_bundesland}"
     )
     fig3.update_layout(xaxis_title="Jahr", yaxis_title="Kumulative Anzahl")
     st.plotly_chart(fig3)
