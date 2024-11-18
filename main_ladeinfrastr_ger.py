@@ -2,16 +2,6 @@ import streamlit as st
 
 from mypages import sub_p0, sub_p1, sub_p2, sub_p3, sub_p4, sub_p5, sub_p6, sub_p_eu, sub_p_map, Page1, page6, page7, page8
 
-
-# Daten laden
-# data = pd.read_csv("data\ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
-# # Unnötige Spalten entfernen
-# data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4' ])
-# data = data.dropna(subset=['Inbetriebnahmedatum'])
-# data = data.dropna(subset=['Betreiber'])
-
-# 'Betreiber', 'Straße', 'Hausnummer', 'Adresszusatz', 'Postleitzahl','Ort', 'Bundesland', 'Kreis/kreisfreie Stadt', 'Breitengrad','Längengrad', 'Inbetriebnahmedatum','Nennleistung Ladeeinrichtung [kW]', 'Art der Ladeeinrichung','Anzahl Ladepunkte', 'Steckertypen1', 'P1 [kW]', 'Public Key1','Steckertypen2', 'P2 [kW]', 'Public Key2', 'Steckertypen3', 'P3 [kW]','Public Key3', 'Steckertypen4', 'P4 [kW]', 'Public Key4'],
-
 st.set_page_config(layout="wide", page_title="Ladeinfrastrukturanalyse von Petra und Roman")
 # HTML für Titel mit Rahmen und anderer Schriftart
 title_html = """

@@ -4,7 +4,7 @@ import folium
 from streamlit_folium import st_folium
 
 # Daten laden
-data = pd.read_csv("ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
+data = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
 
 # Unnötige Spalten / Zeilen entfernen
 data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4'])
