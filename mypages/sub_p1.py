@@ -8,7 +8,7 @@ import streamlit as st
 data_org = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
 # Unnötige Spalten entfernen
 
-data = pd.read_csv("data/data/ladesaeulen.csv", delimiter=";")
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
 
 def app():
     st.title("Überblick über die Daten")
