@@ -4,19 +4,10 @@ import folium
 from streamlit_folium import st_folium
 
 # Daten laden
-data = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
+data = pd.read_csv("ladesaeulen.csv", delimiter=";", on_bad_lines="skip")
 
-# Unnötige Spalten / Zeilen entfernen
-data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4'])
-data = data.dropna(subset=['Inbetriebnahmedatum', 'Betreiber', 'Bundesland'])
-
-data['Breitengrad'] = data['Breitengrad'].str.replace(',', '.').str.rstrip('.').astype(float)
-data['Längengrad'] = data['Längengrad'].str.replace(',', '.').str.rstrip('.').astype(float)
-
-data = data.rename(columns={'Breitengrad': 'lat', 'Längengrad': 'lon'})
-
-# Jahr der Inbetriebnahme in neue Spalte
-data['Inbetriebnahmejahr'] = pd.to_datetime(data['Inbetriebnahmedatum'], format='%d.%m.%Y', errors='coerce').dt.year
+# Umbenennen Spalten: Breiten- und Längengrad
+data = data.rename(columns={"Längengrad": "lon", "Breitengrad": "lat"})
 
 # App-Definition
 def app():
@@ -31,6 +22,9 @@ def app():
         value=int(data['Inbetriebnahmejahr'].min()),
         step=1
     )
+    # Umbenennen Spalten: Breiten- und Längengrad
+
+
 
     # Filtern der Daten nach Jahr
     filtered_data = data[data['Inbetriebnahmejahr'] <= year_filter]
