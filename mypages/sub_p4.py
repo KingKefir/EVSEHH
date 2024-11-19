@@ -1,25 +1,13 @@
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
-import warnings
 import streamlit as st
 
 # Daten laden
-data = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip", low_memory=False)
-# Unnötige Spalten entfernen
-data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4' ])
-data = data.dropna(subset=['Inbetriebnahmedatum'])
-data = data.dropna(subset=['Betreiber'])
-
-data['P3 [kW]'] = data['P3 [kW]'].str.replace(',', '.', regex=False)
-#Konvertieren in float, NaN-Werte bleiben erhalten
-data['P3 [kW]'] = pd.to_numeric(data['P3 [kW]'], errors='coerce')
-
-data['Inbetriebnahmejahr'] = pd.to_datetime(data['Inbetriebnahmedatum'], format='%d.%m.%Y', errors='coerce').dt.year
+data = pd.read_csv("ladesaeulen.csv", delimiter=";")
 
 
 def app():
-    st.title("Ladesäulen nach Anzahl der Ladepunkte")
+    st.title("Ladesäulen nach Anzahl der Ladeplätze")
 
     def berechne_ladeplaetze(row):
         if pd.isnull(row['Steckertypen2']):
@@ -34,7 +22,11 @@ def app():
     data["Anzahl Ladeplätze pro Säule"] = data.apply(berechne_ladeplaetze, axis=1)
 
     # Gruppierung der Daten
-    anzahl_nach_plätzen = data.groupby('Anzahl Ladeplätze pro Säule').size().reset_index(name='anzahl')
+    #anzahl_nach_plätzen = data.groupby('Anzahl Ladeplätze pro Säule').size().reset_index(name='anzahl')
+
+    anzahl_nach_plätzen = data.groupby(['Anzahl Ladeplätze pro Säule', 'Ladegeschwindigkeit']) \
+                          .size() \
+                          .reset_index(name='anzahl')
 
     # Daten anzeigen
     st.write(data)
@@ -44,6 +36,7 @@ def app():
         anzahl_nach_plätzen,
         x='Anzahl Ladeplätze pro Säule',
         y='anzahl',
+        color='Ladegeschwindigkeit',
         title="Anzahl Ladeplätze pro Säule"
     )
     fig1.update_layout(

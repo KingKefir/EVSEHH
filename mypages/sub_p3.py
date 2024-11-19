@@ -4,26 +4,22 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # Daten laden
-data = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip", low_memory=False)
-# Unnötige Spalten entfernen
-data = data.drop(columns=['Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4'])
-data = data.dropna(subset=['Inbetriebnahmedatum', 'Betreiber', 'Bundesland'])
+data = pd.read_csv("ladesaeulen.csv", delimiter=";")
+
 
 # App-Definition
 def app():
     st.title("Anzahl der Ladesäulen")
 
-    st.subheader("Anzahl Ladesäulen in Deutschland - ab 2007")
+    st.subheader("Anzahl Ladesäulen in Deutschland - ab 2010")
 
-    # Jahr der Inbetriebnahme in neue Spalte
-    data['Inbetriebnahmejahr'] = pd.to_datetime(data['Inbetriebnahmedatum'], format='%d.%m.%Y', errors='coerce').dt.year
 
     # Fliler: Nur Daten ab 2007, da vorher nicht durchgängig
-    ab_2007 = data["Inbetriebnahmejahr"]>=2007
-    data_ab_2007 = data[ab_2007]
+    ab_2010 = data["Inbetriebnahmejahr"]>=2010
+    data_ab_2010 = data[ab_2010]
 
     # Anzahl der neu in Betrieb genommenen Ladesäulen pro Jahr berechnen
-    lasta_neu_pro_jahr = data_ab_2007.groupby('Inbetriebnahmejahr').size().reset_index(name='neu_inbetrieb_genommene')
+    lasta_neu_pro_jahr = data_ab_2010.groupby('Inbetriebnahmejahr').size().reset_index(name='neu_inbetrieb_genommene')
     lasta_neu_pro_jahr = lasta_neu_pro_jahr.dropna()
 
     # Kumulative Anzahl der Ladesäulen berechnen
@@ -33,7 +29,7 @@ def app():
     lasta_neu_pro_jahr['wachstum_prozent'] = lasta_neu_pro_jahr['kumulative_anzahl'].pct_change() * 100
 
     # 5. Prozentuale Zunahme und kumulative Anzahl für jedes Bundesland berechnen
-    bundeslandzahlen = data_ab_2007.groupby(['Bundesland', 'Inbetriebnahmejahr']).size().reset_index(name='anzahl')
+    bundeslandzahlen = data_ab_2010.groupby(['Bundesland', 'Inbetriebnahmejahr']).size().reset_index(name='anzahl')
     bundeslandzahlen['kumulative_anzahl'] = bundeslandzahlen.groupby('Bundesland')['anzahl'].cumsum()
     bundeslandzahlen['wachstum_prozent'] = bundeslandzahlen.groupby('Bundesland')['kumulative_anzahl'].pct_change() * 100
 
