@@ -5,7 +5,7 @@ from folium import Choropleth
 
 def app():
        # CSV-Daten einlesen
-    data = pd.read_csv("combined_ev_data_23.csv", delimiter=";", decimal=".", header=0)
+    data = pd.read_csv("data/combined_ev_data_23.csv", delimiter=";", decimal=".", header=0)
     df = pd.DataFrame(data)
 
     # Streamlit App: Darstellung
