@@ -1,6 +1,6 @@
 import streamlit as st
 
-from mypages import sub_p0, sub_p1, sub_p2, sub_p3, sub_p4, sub_p5, sub_p6, sub_p_eu, sub_p_map, Page1, page6, page7, page8
+from mypages import sub_p0, sub_p1, sub_p2, sub_p3, sub_p4, sub_p5, sub_p6, sub_p_eu, sub_p_map, Page1, page6, page7, page8, quellen, dankebye
 
 st.set_page_config(layout="wide", page_title="Ladeinfrastrukturanalyse von Petra und Roman")
 # HTML für Titel mit Rahmen und anderer Schriftart
@@ -34,7 +34,9 @@ pages = {
     "9. Ladesäulen in Deutschland": Page1,
     "10. Verbrauchsrechner": page6,
     "11. Zeitreihenanalyse Kanadischer Daten": page7,
-    "12. Reichweiten- und Effizienzanalyse": page8
+    "12. Reichweiten- und Effizienzanalyse": page8,
+    "13. Tschüssi": dankebye,
+    "14. Quellenangabe": quellen
         }
 
 
