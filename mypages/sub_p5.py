@@ -7,7 +7,7 @@ from streamlit_folium import st_folium
 
 warnings.filterwarnings("ignore")
 
-data_lp = pd.read_csv("ladeplaetze.csv", delimiter=";")
+data_lp = pd.read_csv("data/ladeplaetze.csv", delimiter=";")
 
 
 def app():

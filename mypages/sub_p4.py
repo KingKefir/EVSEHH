@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 
 # Daten laden
-data = pd.read_csv("ladesaeulen.csv", delimiter=";")
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
 
 
 def app():

@@ -4,7 +4,7 @@ import folium
 from streamlit_folium import st_folium
 
 # Daten laden
-data = pd.read_csv("ladesaeulen.csv", delimiter=";", on_bad_lines="skip")
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";", on_bad_lines="skip")
 
 # Umbenennen Spalten: Breiten- und Längengrad
 data = data.rename(columns={"Längengrad": "lon", "Breitengrad": "lat"})

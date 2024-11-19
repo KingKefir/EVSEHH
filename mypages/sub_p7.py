@@ -5,7 +5,7 @@ import streamlit as st
 
 warnings.filterwarnings("ignore")
 
-data = pd.read_csv("ladesaeulen.csv", delimiter=";")
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
 
 
 def app():

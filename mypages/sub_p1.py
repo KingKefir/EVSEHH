@@ -5,10 +5,10 @@ import warnings
 import streamlit as st
 
 # Daten laden
-data_org = pd.read_csv("ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
+data_org = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
 # Unnötige Spalten entfernen
 
-data = pd.read_csv("ladesaeulen.csv", delimiter=";")
+data = pd.read_csv("data/data/ladesaeulen.csv", delimiter=";")
 
 def app():
     st.title("Überblick über die Daten")
@@ -32,7 +32,7 @@ def app():
 
     st.divider()
 
-    st.subheader("Anpassung des Datensatzes - Erstellung von zwei neuen csv-Dateien (ladesaeulen.csv und ladeplaetze.csv) zur Vermeidung hoher Ladezeiten")
+    st.subheader("Anpassung des Datensatzes - Erstellung von zwei neuen csv-Dateien (data/ladesaeulen.csv und ladeplaetze.csv) zur Vermeidung hoher Ladezeiten")
     st.markdown('''
                 Folgende Anpassungen wurden durchgeführt:
                 - Entfernung überflüssiger Spalten ('Adresszusatz', 'Public Key1', 'Public Key2', 'Public Key3', 'Public Key4')
