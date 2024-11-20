@@ -1,7 +1,8 @@
 version: '3.9'
 name: 'evse-praesentation'
 services:
-  streamlit_app:
+  evse_analysis:
+    image: kefirconnoisseur/evse_analysis:latest
     ports:
       - "8501:8501"
     volumes:
