@@ -39,21 +39,7 @@ def app():
         threshold_scale=[0, 2, 5, 10, 15]
     ).add_to(map)
 
-    
-    # Quickinfo 
-    # geojson_layer = folium.GeoJson(
-    #     geojson_url,
-    #     tooltip=folium.GeoJsonTooltip(
-    #         fields=["NAME"],  # Das Attribut, das den Ländernamen enthält
-    #         aliases=["Country:"],  # Label für das Tooltip
-    #         labels=True
-    #     ),
-    #     style_function=lambda feature: {
-    #         'color': 'black',
-    #         'weight': '1'
-    #     }
-    # )
-    # geojson_layer.add_to(m)
+   
     choropleth1.geojson.add_child(
         folium.features.GeoJsonTooltip(
             fields=['NAME'],
@@ -69,12 +55,6 @@ def app():
 
     # Zeige die Karte in Streamlit an
     st.write("Prozentualer Anteil der E-Autos an der Gesamtzahl 2023:")
-    # st.components.v1.html(m._repr_html_(), height=500)
-
-
-    # 2. Karte
-    # Erstelle Karte mit Folium
-    m = folium.Map(location=[50, 10], zoom_start=4)
 
 
     # Füge Choropleth hinzu für die Länderflächen, basierend auf dem Anteil E-Autos
@@ -95,19 +75,6 @@ def app():
     ).add_to(map)
 
     # Quickinfo 
-    # geojson_layer = folium.GeoJson(
-    #     geojson_url,
-    #     tooltip=folium.GeoJsonTooltip(
-    #         fields=["NAME"],  # Das Attribut, das den Ländernamen enthält
-    #         aliases=["Country:"],  # Label für das Tooltip
-    #         labels=True
-    #     ),
-    #     style_function=lambda feature: {
-    #         'color': 'black',
-    #         'weight': '1'
-    #     }
-    # )
-    # geojson_layer.add_to(m)
 
     choropleth2.geojson.add_child(
         folium.features.GeoJsonTooltip(
@@ -121,10 +88,6 @@ def app():
             tooltip_template="""<div>Country: {name}"""
         )
     )
-
-    # Zeige die Karte in Streamlit an
-    # st.write("Anzahl der E_Autos pro Ladestation 2023:")
-    # st.components.v1.html(m._repr_html_(), height=500)
 
     folium.LayerControl(collapsed=True, position='bottomleft').add_to(map)
 
