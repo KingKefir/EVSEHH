@@ -8,7 +8,7 @@ def app():
     
 
 
-    data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
+    data = pd.read_csv("data/ladesaeulen.csv", delimiter=";", low_memory=False)
 
     # Umbenennen Spalten: Breiten- und Längengrad
     data = data.rename(columns={"Längengrad": "lon", "Breitengrad": "lat"})

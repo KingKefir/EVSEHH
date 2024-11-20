@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 # Daten laden
-data_org = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
+data_org = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip", low_memory=False)
 
 
 

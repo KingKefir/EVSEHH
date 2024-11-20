@@ -1,9 +1,10 @@
 import streamlit as st
 
 
-def app():
-    st.title("Ladesäulen nach Anzahl der Ladeplätze")
+def app():    
+    st.title("Karte - Anzahl der Ladesäulen")
+    st.subheader("Zeitliche Entwicklung")
 
     gif_path = "data/Comp1_3.gif"  # Replace with the path to your GIF file
 
-    st.image(gif_path, width = 600, use_column_width=False, caption="Deutschland") 
+    st.image(gif_path, use_column_width=False, caption="Deutschland") 

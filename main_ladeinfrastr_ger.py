@@ -24,22 +24,22 @@ st.markdown(title_html, unsafe_allow_html=True)
 
 pages = {
     "0. Startseite": sub_p0,
-    "1. Einordnung: Deutschland und seine Nachbarländer (2023)": sub_p_eu,
-    "2. Überblick über die Daten": sub_p1,
-    "3. Erster Ansatz: Analyse mit SQL und Tableau": sub_p2,
-    "4. Karte: Anzahl der Ladesäulen nach Jahren": sub_p_map,
+    "1. Überblick über die Daten": sub_p1,
+    "2. Erster Ansatz: Analyse mit SQL und Tableau": sub_p2,
+    "3. Karte: Anzahl der Ladesäulen nach Jahren": sub_p4_alt,
+    "4. Ladesäulen in Deutschland": Page1,
+    "4. Karte: Anzahl der Ladesäulen nach Jahren": sub_p4_alt,
     "5. Analyse der Ladesäulen": sub_p3,
     "6. Ladesäulen nach Anzahl der Ladeplätze": sub_p4,
     "7. Ladeplätze nach Leistung": sub_p5,
     "8. Steckertypen": sub_p6,
-    "9. Ladesäulen in Deutschland": Page1,
+    "9. Betreiber": sub_p7,
     "10. Verbrauchsrechner": page6,
-    "11. Zeitreihenanalyse Kanadischer Daten": page7,
-    "12. Reichweiten- und Effizienzanalyse": page8,
-    "13. Betreiber": sub_p7,
-    "14. GIF Alternative": sub_p4_alt,
-    "15. Tschüssi": dankebye,
-    "16. Quellenangabe": quellen
+    "11. Deutschland und seine Nachbarländer (2023)": sub_p_eu,
+    "12. Zeitreihenanalyse Kanadischer Daten": page7,
+    "13. Reichweiten- und Effizienzanalyse": page8,
+    "14. Tschüssi": dankebye,
+    "15. Quellenangabe": quellen
 
         }
 
