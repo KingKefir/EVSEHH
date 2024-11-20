@@ -56,7 +56,7 @@ def app():
     # Anzahl der Ladesäulen zum Geo-Datensatz hinzugefügt, um diesen im Landkarten-Tooltip anzeigbar zu machen
 
     # Karte erstellen
-    map = folium.Map(location=[52, 10.5], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
+    map = folium.Map(location=[51, 10.3], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
 
     # Anzahl von Ladestationen (count_evse) und Anzahl von Elektromobilen und Plug-in-Hyriden (ev_count)
     # wird der geodata beigefügt, um diese Daten in den Tooltipps sichtbar zu machen. 
@@ -131,7 +131,5 @@ def app():
         )
     )
     folium.LayerControl(collapsed=False, position='bottomright').add_to(map)
-
-    ## TODO kann man die >> o cartodbpositron << von der Layercontrol entfernen?
 
     st_map = st_folium(map, width=700, height=650)
