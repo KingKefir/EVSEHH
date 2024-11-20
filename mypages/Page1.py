@@ -3,7 +3,7 @@ import pandas as pd
 import folium
 from streamlit_folium import st_folium
 import json
-
+from folium.plugins import GroupedLayerControl
 
 
 def app():
@@ -86,7 +86,7 @@ def app():
         overlay=True,
         control=True,
         show=True,
-        legend_name="Ladesäulen per Bundesland"
+        legend_name="Ladesäulen pro Bundesland"
     ).add_to(map)
 
     # Add tooltip
@@ -130,6 +130,12 @@ def app():
             tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}<br>E-Fahrzeuge: {ev_count}<br>EVSE pro 1000 EV: {EVSE_Ratio}</div>"""
         )
     )
-    folium.LayerControl(collapsed=False, position='bottomright').add_to(map)
+    folium.LayerControl(collapsed=True, position='bottomleft').add_to(map)
 
-    st_map = st_folium(map, width=700, height=650)
+    GroupedLayerControl(
+    groups={'groups1': [choropleth1, choropleth2]},
+    collapsed=False,
+    position='bottomright'
+    ).add_to(map)
+
+    st_map = st_folium(map, width=900, height=650)
