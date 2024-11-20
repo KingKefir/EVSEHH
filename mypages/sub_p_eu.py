@@ -4,7 +4,20 @@ import folium
 from folium import Choropleth
 from streamlit_folium import st_folium
 import json
+import requests
 from folium.plugins import GroupedLayerControl
+
+def create_tooltip():
+    return folium.features.GeoJsonTooltip(
+           fields=['NAME', 'total_number_cars', 'number_ev', 'percentage_ev', 'ev_per_evse'],
+            aliases=['Country:', 'Fahzeuge Gesamt:', 'EVs Gesamt:', 'Anteil EV(%): ', 'EV pro Ladesäulen'],
+            labels=True,
+            sticky=True,
+            localize=True,
+            toLocaleString=True,
+            style=("background-color: white; color: black; font-weight: bold;"),
+            tooltip_template="""<div>Country: {name}<br>Fahrzeuge Gesamt: {total_number_cars}<br>EV Gesamt: {number_ev}<br>Anteil EV(%): {percentage_ev}<br>EV pro Ladesäulen: {ev_per_evse}</div>"""
+    )
 
 def app():
        # CSV-Daten einlesen
@@ -21,10 +34,24 @@ def app():
 
     # Lade eine GeoJSON-Datei mit Ländergrenzen
     geojson_url = "https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/GeoJSON/europe.geojson"
+    res = requests.get(geojson_url)
+    geodata = res.json()
+    
+    for feature in geodata['features']:
+        name = feature['properties']['NAME']
+        total_number_cars = df.loc[df['country'] == name, 'total_number_cars']
+        number_ev = df.loc[df['country'] == name, 'number_ev']
+        percentage_ev =  df.loc[df['country'] == name, 'percentage_ev']
+        ev_per_evse =  df.loc[df['country'] == name, 'number_ev_per_charging_point']
+
+        feature['properties']['total_number_cars'] = int(total_number_cars.iloc[0]) if not total_number_cars.empty else 0
+        feature['properties']['number_ev'] = int(number_ev.iloc[0]) if not number_ev.empty else 0
+        feature['properties']['percentage_ev'] = round(float(percentage_ev.iloc[0]), 2) if not percentage_ev.empty else 0
+        feature['properties']['ev_per_evse'] = int(ev_per_evse.iloc[0]) if not ev_per_evse.empty else 0
 
     # Füge Choropleth hinzu für die Länderflächen, basierend auf dem Anteil E-Autos
     choropleth1 = Choropleth(
-        geo_data=geojson_url,
+        geo_data=geodata,
         name="Anteil E-Autos (%)",
         data=df,
         columns=["country", "percentage_ev"],
@@ -39,19 +66,7 @@ def app():
         threshold_scale=[0, 2, 5, 10, 15]
     ).add_to(map)
 
-   
-    choropleth1.geojson.add_child(
-        folium.features.GeoJsonTooltip(
-            fields=['NAME'],
-            aliases=['Land:'],
-            labels=True,
-            sticky=True,
-            localize=True,
-            toLocaleString=True,
-            style=("background-color: white; color: black; font-weight: bold;"),
-            tooltip_template="""<div>Land: {name}"""
-        )
-    )
+    choropleth1.geojson.add_child(create_tooltip())
 
     # Zeige die Karte in Streamlit an
     st.write("Prozentualer Anteil der E-Autos an der Gesamtzahl 2023:")
@@ -59,7 +74,7 @@ def app():
 
     # Füge Choropleth hinzu für die Länderflächen, basierend auf dem Anteil E-Autos
     choropleth2 = Choropleth(
-        geo_data=geojson_url,
+        geo_data=geodata,
         name="Durchschnittliche Anzahl E-Autos pro Ladepunkt",
         data=df,
         columns=["country", "number_ev_per_charging_point"],
@@ -76,23 +91,12 @@ def app():
 
     # Quickinfo 
 
-    choropleth2.geojson.add_child(
-        folium.features.GeoJsonTooltip(
-            fields=['NAME'],
-            aliases=['Country:'],
-            labels=True,
-            sticky=True,
-            localize=True,
-            toLocaleString=True,
-            style=("background-color: white; color: black; font-weight: bold;"),
-            tooltip_template="""<div>Country: {name}"""
-        )
-    )
+    choropleth2.geojson.add_child(create_tooltip())
 
     folium.LayerControl(collapsed=True, position='bottomleft').add_to(map)
 
     GroupedLayerControl(
-    groups={'groups1': [choropleth1, choropleth2]},
+    groups={'EU': [choropleth1, choropleth2]},
     collapsed=False,
     position='bottomright'
     ).add_to(map)
