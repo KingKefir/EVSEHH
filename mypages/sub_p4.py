@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 
 # Daten laden
-data = pd.read_csv("data/ladesaeulen.csv", delimiter=";", low_memory=False)
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
 
 
 def app():
@@ -28,8 +28,6 @@ def app():
                           .size() \
                           .reset_index(name='anzahl')
 
-    # Daten anzeigen
-    st.write(data)
 
     # Plot erstellen
     fig1 = px.bar(
@@ -45,27 +43,4 @@ def app():
     )
     st.plotly_chart(fig1)
 
-    # Fliler: Nur Daten ab 2007, da der Plot sonst nur Werte im Bereich x>2010 auseinanderhalten kann
-
-    ab_2007 = data["Inbetriebnahmejahr"]>=2007
-    data_ab_2007 = data[ab_2007]
-
-    ladepl_zahlen = data_ab_2007.groupby(['Anzahl Ladeplätze pro Säule', 'Inbetriebnahmejahr']).size().reset_index(name='anzahl_säulen_neu')
-
-    ladepl_zahlen['kumulative_anzahl_säulen'] = ladepl_zahlen.groupby(['Anzahl Ladeplätze pro Säule'])['anzahl_säulen_neu'].cumsum()
-
-    fig2 = px.line(
-    ladepl_zahlen,
-    x='Inbetriebnahmejahr',
-    y='kumulative_anzahl_säulen', 
-    color='Anzahl Ladeplätze pro Säule',       
-    title="Gesamtanzahl der Ladesäulen nach Anzahl der Ladeplätze ab 2008",
-    labels={
-        'Inbetriebnahmejahr': 'Inbetriebnahmejahr',
-        'kumulative_anzahl_säulen': 'Gesamtanzahl der Ladesäulen',  
-        'Anzahl Ladeplätze pro Säule': 'Anzahl Ladeplätze pro Säule' 
-    }
-    )
-
-    # Plot anzeigen
-    st.plotly_chart(fig2)
+    

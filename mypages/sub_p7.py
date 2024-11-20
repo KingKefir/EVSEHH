@@ -11,22 +11,13 @@ data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
 def app():
     st.title("Die Betreiber der öffentlichen Ladesäulen in Deutschland")
 
-    st.subheader("Ladesäulenbetreiber - Anteile (Andere Betreiber: Betreiber mit weniger als 200 Ladesäulen)")
+    st.subheader("")
 
     betreiber_group = data.groupby("Betreiber").size().reset_index(name= 'Anzahl')
     betreiber_group.loc[betreiber_group['Anzahl'] < 200, 'Betreiber'] = 'Andere Betreiber'
     betreiber_group = betreiber_group.sort_values(by='Anzahl', ascending=False).reset_index(drop=True)
     betreiber_group.index += 1
 
-    fig = px.pie(betreiber_group, 
-                names='Betreiber', 
-                values='Anzahl', 
-                color_discrete_sequence=px.colors.sequential.Viridis,
-                height=400)
-
-    st.plotly_chart(fig)
-
-    st.divider()
 
     col1, col2 = st.columns(2)
 
@@ -53,7 +44,25 @@ def app():
 
 
 
+    betr_ladegeschw = data.groupby(['Ladegeschwindigkeit','Betreiber']).size().reset_index(name='Anzahl')
+    # Absteigend sortieren nach Ladegeschwindigkeit und Anzahl
+    betr_ladegeschw = betr_ladegeschw.sort_values(by=['Ladegeschwindigkeit', 'Anzahl'], ascending=[True, False])
+
+    # Top 5 Betreiber pro Ladegeschwindigkeit
+    top5_betreiber = betr_ladegeschw.groupby('Ladegeschwindigkeit').head(5)
+    
+
+    # Sunburst-Diagramm (Ladegeschwindigkeit zuerst))
+    fig5 = px.sunburst(
+        top5_betreiber,
+        path=["Ladegeschwindigkeit", "Betreiber"],  
+        values="Anzahl",  
+        title="Sunburst-Diagramm: Ladegeschwindigkeit und Betreiber",
+        width=800,  
+        height=800  
+        )
 
 
+    st.plotly_chart(fig5, use_container_width=True)
 
-
+    
