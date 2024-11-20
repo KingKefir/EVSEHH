@@ -5,10 +5,10 @@ import warnings
 import streamlit as st
 
 # Daten laden
-data_org = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip")
+data_org = pd.read_csv("data/ladesaeulenregister.csv", delimiter=";", on_bad_lines="skip", low_memory=False)
 # Unnötige Spalten entfernen
 
-data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";", low_memory=False)
 
 def app():
     st.title("Überblick über die Daten")

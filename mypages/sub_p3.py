@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # Daten laden
-data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";", low_memory=False)
 
 
 # App-Definition
