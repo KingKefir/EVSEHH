@@ -15,7 +15,7 @@ title_html = """
         font-size: 24px;
         color: #000000;
         font-weight: bold;">
-        LADEINFRASTRUKTUR IN DEUTSCHLAND
+        LADEINFRASTRUKTUR IN DEUTSCHLAND UND DARÜBER HINAUS
     </div>
 """
 
