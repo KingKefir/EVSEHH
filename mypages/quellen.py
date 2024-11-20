@@ -11,6 +11,8 @@ def app():
     bna = "https://www.bundesnetzagentur.de/DE/Home/home_node.html"
     statistikportal = "https://www.statistikportal.de/de/open-data"
     geojsongithub = "https://github.com/isellsoap/deutschlandGeoJSON/blob/main/2_bundeslaender/4_niedrig.geo.json"
+    shutterstock = "https://www.shutterstock.com/"
+    eurostat = "https://ec.europa.eu/eurostat/data/database"
 
     st.write(f'''
     {adaclink}\n
@@ -19,4 +21,6 @@ def app():
     {bna}\n
     {statistikportal}\n
     {geojsongithub}\n
+    {shutterstock}\n
+    {eurostat}
     ''')
