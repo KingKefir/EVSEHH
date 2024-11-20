@@ -5,6 +5,17 @@ from streamlit_folium import st_folium
 import json
 from folium.plugins import GroupedLayerControl
 
+def create_tooltip():
+    return  folium.features.GeoJsonTooltip(
+            fields=['name', 'Count', 'ev_count', 'EVSE_Ratio'],
+            aliases=['Bundesland:', 'Anzahl Ladesäulen:', 'Anzahl E-Fahrzeuge:','EVSE pro 1000 E-Fahrzeuge:'],
+            labels=True,
+            sticky=True,
+            localize=True,
+            toLocaleString=True,
+            style=("background-color: white; color: black; font-weight: bold;"),
+            tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}<br>E-Fahrzeuge: {ev_count}<br>EVSE pro 1000 EV: {EVSE_Ratio}</div>"""
+    )
 
 def app():
 
@@ -90,18 +101,7 @@ def app():
     ).add_to(map)
 
     # Add tooltip
-    choropleth1.geojson.add_child(
-        folium.features.GeoJsonTooltip(
-            fields=['name', 'Count', 'ev_count', 'EVSE_Ratio'],
-            aliases=['Bundesland:', 'Anzahl Ladesäulen:', 'Anzahl E-Fahrzeuge:','EVSE pro 1000 E-Fahrzeuge:'],
-            labels=True,
-            sticky=True,
-            localize=True,
-            toLocaleString=True,
-            style=("background-color: white; color: black; font-weight: bold;"),
-            tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}<br>E-Fahrzeuge: {ev_count}<br>EVSE pro 1000 EV: {EVSE_Ratio}</div>"""
-        )
-    )
+    choropleth1.geojson.add_child(create_tooltip())
 
     choropleth2 = folium.Choropleth(
         geo_data=geodata,
@@ -118,18 +118,7 @@ def app():
         legend_name="Ladesäulen pro E-Fahrzeug"
     ).add_to(map)
 
-    choropleth2.geojson.add_child(
-        folium.features.GeoJsonTooltip(
-            fields=['name', 'Count', 'ev_count', 'EVSE_Ratio'],
-            aliases=['Bundesland:', 'Anzahl Ladesäulen:', 'Anzahl E-Fahrzeuge:','EVSE pro 1000 E-Fahrzeuge:'],
-            labels=True,
-            sticky=True,
-            localize=True,
-            toLocaleString=True,
-            style=("background-color: white; color: black; font-weight: bold;"),
-            tooltip_template="""<div>Bundesland: {name}<br>Count: {Count}<br>E-Fahrzeuge: {ev_count}<br>EVSE pro 1000 EV: {EVSE_Ratio}</div>"""
-        )
-    )
+    choropleth2.geojson.add_child(create_tooltip())
     folium.LayerControl(collapsed=True, position='bottomleft').add_to(map)
 
     GroupedLayerControl(
