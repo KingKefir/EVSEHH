@@ -31,6 +31,10 @@ def app():
 
     with col2:
         betreiber_group_haupt = betreiber_group.loc[betreiber_group['Betreiber'] != 'Andere Betreiber']
+        betreiber_group_haupt = betreiber_group_haupt.sort_values(by='Anzahl', ascending=False)  # Sortieren
+    
+        # Nur die Top 20 auswählen
+        betreiber_group_haupt = betreiber_group_haupt.head(20)
 
         fig = px.bar(betreiber_group_haupt.sort_values(by='Anzahl'), 
                     x='Anzahl', 
@@ -39,7 +43,7 @@ def app():
                     height=600,
                     orientation='h',
                     color_discrete_sequence=px.colors.sequential.Blues_r)
-        fig.update_layout(showlegend=False)
+        fig.update_layout(showlegend=False, bargap=0.2, font=dict(size=12))
         st.plotly_chart(fig)
 
 
