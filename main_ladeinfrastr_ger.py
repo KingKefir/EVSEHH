@@ -29,7 +29,6 @@ pages = {
     "3. Karte: Anzahl der Ladesäulen nach Jahren": sub_p4_alt,
     "4. Ladesäulen in Deutschland": Page1,
     "5. Analyse der Ladesäulen": sub_p3,
-    "6. Ladesäulen nach Anzahl der Ladeplätze": sub_p4,
     "7. Ladesäulen nach Leistung": sub_p5,
     "8. High Power Charging": sub_p6,
     "9. Betreiber": sub_p7,

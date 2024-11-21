@@ -13,6 +13,7 @@ def app():
     geojsongithub = "https://github.com/isellsoap/deutschlandGeoJSON/blob/main/2_bundeslaender/4_niedrig.geo.json"
     shutterstock = "https://www.shutterstock.com/"
     eurostat = "https://ec.europa.eu/eurostat/data/database"
+    openai = "https://openai.com/"
 
     st.write(f'''
     {adaclink}\n
@@ -23,4 +24,5 @@ def app():
     {geojsongithub}\n
     {shutterstock}\n
     {eurostat}
+    {openai}
     ''')

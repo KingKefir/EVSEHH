@@ -41,13 +41,11 @@ def app():
     st.sidebar.header("Filter Options")
     make_filter = st.sidebar.multiselect("Marke auswählen", options=df['Make'].unique(), default=df['Make'].unique())
     year_filter = st.sidebar.slider("Baujahr der Modells auswählen", int(df['Model year'].min()), int(df['Model year'].max()), (int(df['Model year'].min()), int(df['Model year'].max())))
-    class_filter = st.sidebar.multiselect("Fahrzeugtyp auswählen", options=df['Vehicle class'].unique(), default=df['Vehicle class'].unique())
 
     # Apply filters to DataFrame
     filtered_df = df[(df['Make'].isin(make_filter)) &
                     (df['Model year'] >= year_filter[0]) &
-                    (df['Model year'] <= year_filter[1]) &
-                    (df['Vehicle class'].isin(class_filter))]
+                    (df['Model year'] <= year_filter[1])]
 
     # Range vs. Efficiency Plot
     st.header("Reichweite - Wirkungsgrad (kWh/100 km)")
@@ -58,16 +56,10 @@ def app():
                     title="Reichweite gegenüber Gesamtverbraucht je Marke")
     st.plotly_chart(fig1)
 
-    # Motor Power by Year Plot
-    st.header("Motor Power over Model Years")
-    fig2 = px.line(filtered_df, x='Model year', y='Motor (kW)', color='Make',
-                labels={'Model year': 'Model Year', 'Motor (kW)': 'Motor Power (kW)'},
-                title="Leistung gegenüber Baujahr")
-    st.plotly_chart(fig2)
 
-    # Range Distribution by Vehicle Class
-    st.header("Range Distribution by Vehicle Class")
-    fig3 = px.box(filtered_df, x='Vehicle class', y='Range (km)', color='Vehicle class',
-                labels={'Vehicle class': 'Vehicle Class', 'Range (km)': 'Range (km)'},
-                title="Reichweitenverteilung je Fahrzeugtyp")
-    st.plotly_chart(fig3)
+    # Range Distribution by Make
+    st.header("Box Plot der Reichweite nach Hersteller")
+    fig2 = px.box(filtered_df, x='Make', y='Range (km)', color='Make',
+                labels={'Make': 'Make', 'Range (km)': 'Range (km)'},
+                title="Range Distribution by Make")
+    st.plotly_chart(fig2)
