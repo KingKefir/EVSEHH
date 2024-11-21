@@ -24,7 +24,7 @@ def app():
     st.divider()
 
     st.subheader("Anpassung des Datensatzes")
-    st.subheader("Erstellung von zwei neuen csv-Dateien (**ladesaeulen.csv** und **ladeplaetze.csv**) zur Vermeidung langer Ladezeiten")
+    st.subheader("Erstellung einer neuen csv-Datei (**ladesaeulen.csv**) zur Vermeidung langer Ladezeiten")
 
     st.markdown('''
                 Folgende Anpassungen wurden durchgeführt:
@@ -32,7 +32,6 @@ def app():
                 - neue Spalte: Inbetriebnahmejahr
                 - neue Spalte: Ladegeschwindigkeit (nach Nennleistung)
                 - Anpassung von Datentypen (String -> Float)
-                - einzelne Zeile für jeden Ladeplatz (ladeplaetze.csv)
 
                 ''')
 
