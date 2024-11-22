@@ -24,12 +24,13 @@ def app():
     with col1:
 
         top_ten_betreiber = betreiber_group.head(10)
-        st.subheader("Die TOP 10 - Betreiber mit den meisten Ladesäulen")
+        st.write("**Die TOP 10 - Betreiber mit den meisten Ladesäulen**")
         st.write(top_ten_betreiber)
 
 
 
     with col2:
+
         betreiber_group_haupt = betreiber_group.loc[betreiber_group['Betreiber'] != 'Andere Betreiber']
         betreiber_group_haupt = betreiber_group_haupt.sort_values(by='Anzahl', ascending=False)  # Sortieren
     
@@ -37,6 +38,7 @@ def app():
         betreiber_group_haupt = betreiber_group_haupt.head(20)
 
         fig = px.bar(betreiber_group_haupt.sort_values(by='Anzahl'), 
+                    title="Darstellung im Diagramm: Die TOP 20",
                     x='Anzahl', 
                     y='Betreiber', 
                     color='Anzahl',
@@ -61,7 +63,7 @@ def app():
         top5_betreiber,
         path=["Ladegeschwindigkeit", "Betreiber"],  
         values="Anzahl",  
-        title="Sunburst-Diagramm: Ladegeschwindigkeit und Betreiber",
+        title="Sunburst-Diagramm: Ladegeschwindigkeit und Betreiber (Achtung: Es werden nur die TOP 5 pro Kategorie betrachtet.)",
         width=800,  
         height=800  
         )

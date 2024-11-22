@@ -40,7 +40,7 @@ def app():
         title="Anzahl an Ladesäulen nach Leistung und Ladegeschwindigkeit",
         labels={
             'P1 [kW]': 'Leistung [kW]', 
-            'anzahl': 'Anzahl Ladeplätze', 
+            'anzahl': 'Anzahl', 
             'Ladegeschwindigkeit': 'Ladegeschwindigkeit'
         },
         color_discrete_map=ladegeschw_farben  # Farben zuweisen
@@ -48,13 +48,13 @@ def app():
 
     st.plotly_chart(fig1)
 
+    st.write("Das Diagramm zeigt nur die Leistungsklassen, von denen mehr als 500 Ladesäulen registriert sind. ")
 
+    st.divider()
 
 
 
     nach_jahr_ladeg = data.groupby(['Inbetriebnahmejahr','Ladegeschwindigkeit']).size().reset_index(name='Anzahl')
-
-    
 
     fig2 = px.bar(
         nach_jahr_ladeg,

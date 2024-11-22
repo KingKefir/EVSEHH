@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 
 # Daten laden
-data = pd.read_csv("data/ladesaeulen.csv", delimiter=";", low_memory=False)
+data = pd.read_csv("data/ladesaeulen.csv", delimiter=";")
 
 
 def app():
@@ -12,7 +12,7 @@ def app():
     st.subheader("Anzahl Ladesäulen in Deutschland - ab 2010")
 
 
-    # Fliler: Nur Daten ab 2010, da vorher nicht durchgängig
+    # Filter: Nur Daten ab 2010, da vorher nicht vollständig
     ab_2010 = data["Inbetriebnahmejahr"]>=2010
     data_ab_2010 = data[ab_2010]
 
@@ -30,6 +30,7 @@ def app():
     bundeslandzahlen = data_ab_2010.groupby(['Bundesland', 'Inbetriebnahmejahr']).size().reset_index(name='anzahl')
     bundeslandzahlen['kumulative_anzahl'] = bundeslandzahlen.groupby('Bundesland')['anzahl'].cumsum()
     bundeslandzahlen['wachstum_prozent'] = bundeslandzahlen.groupby('Bundesland')['kumulative_anzahl'].pct_change() * 100
+
 
     # Diagramm - neu in Betrieb genommene Ladesäulen pro Jahr
     fig_new = px.bar(

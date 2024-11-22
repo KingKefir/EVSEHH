@@ -14,6 +14,7 @@ def app():
     data = data.rename(columns={"Längengrad": "lon", "Breitengrad": "lat"})
 
     st.subheader("Ladesäulen mit High Power Charging")
+    st.write("Neu in Betrieb genommene Ladesäulen")
     
     # Filter: Daten nur für High Power Charging
     data = data[data['Ladegeschwindigkeit'] == 'High Power Charging']
@@ -21,6 +22,8 @@ def app():
     hpc_nach_jahr = data.groupby("Inbetriebnahmejahr").size().reset_index(name="Anzahl")
 
     st.write(hpc_nach_jahr)
+
+    st.divider()
     
 
 
